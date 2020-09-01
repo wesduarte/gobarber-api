@@ -9,7 +9,6 @@ import FileController from './app/controllers/FileController';
 import authMiddleware from './app/middlewares/auth';
 import multerConfig from './config/multer';
 import NotificationController from './app/controllers/NotificationController';
-import Appointment from './app/models/Appointment';
 
 const routes = new Router();
 const upload = multer(multerConfig);
