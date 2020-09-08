@@ -1,8 +1,8 @@
-import User from '../models/User';
 import { startOfHour, parseISO, isBefore, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import Notification from '../schemas/Notification';
-import Mail from '../../lib/Mail';
+import Cache from '../../lib/Cache';
+import User from '../models/User';
 
 import Appointment from '../models/Appointment';
 
@@ -75,6 +75,8 @@ class CreateAppointmentService {
       content: `Novo agendamento de ${user.name} para o ${formattedDate}`,
       user: provider_id,
     });
+
+    await Cache.invalidatePrefix(`user:${user_id}:appointments`);
 
     return appointment;
   }
